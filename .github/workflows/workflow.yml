@@ -11,12 +11,12 @@ jobs:
             JOB_VAR: "I'm available to all steps in this job"
         steps:
             - name: Step 1
-                run: echo "$WORKFLOW_VAR and $JOB_VAR"
-                env:
-                    STEP_VAR: "I'm only available in this step"
+              run: echo "$WORKFLOW_VAR and $JOB_VAR"
+              env:
+                STEP_VAR: "I'm only available in this step"
             
             - name: Step 2
-                run: |
-                    echo "$WORKFLOW_VAR"  # ✅ Works
-                    echo "$JOB_VAR"       # ✅ Works  
-                    echo "$STEP_VAR"      # ❌ Fails - STEP_VAR only existed in Step 1
+              run: |
+                echo "$WORKFLOW_VAR"  # ✅ Works
+                echo "$JOB_VAR"       # ✅ Works  
+                echo "$STEP_VAR"      # ❌ Fails - STEP_VAR only existed in Step 1
