@@ -1,10 +1,27 @@
-name: Secrets Practice
+name: Security Practice
 on: [push]
 
+# Start with minimal permissions
+permissions:
+    contents: read
+
 jobs:
-    secret-test:
+    safe-job:
         runs-on: ubuntu-latest
+        # This job only needs to read contents, so it uses the workflow defaults
         steps:
-            - name: Show secret
-              run: |
-                echo "The secret message is: ${{ secrets.GREETING }}"
+            - uses: actions/checkout@v4
+            - run: echo "I can read code but not change it"
+    
+    reporting-job:
+        runs-on: ubuntu-latest
+        # This job needs to write to issues
+        permissions:
+            contents: read
+            issues: write
+        steps:
+            - name: Create an issue
+              uses: peter-evans/create-issue@v5
+              with:
+                title: "Automated Issue"
+                body: "This issue was created by a GitHub Actions workflow."
