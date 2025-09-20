@@ -6,4 +6,5 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Show secret
-              run: echo "The secret message is: ${{ secrets.GREETING }}"
+              run: |
+                echo "The secret message is: ${{ secrets.GREETING }}"
