@@ -20,8 +20,10 @@ jobs:
             contents: read
             issues: write
         steps:
+            - name: Create issue body file
+              run: echo "This issue was created by a GitHub Actions workflow." > issue-body.txt
             - name: Create an issue
               uses: peter-evans/create-issue-from-file@v4
               with:
                 title: "Automated Issue"
-                body: "This issue was created by a GitHub Actions workflow."
+                content-filepath: issue-body.txt
