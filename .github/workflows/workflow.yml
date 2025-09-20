@@ -1,22 +1,9 @@
-name: Environment Example
+name: Secrets Practice
 on: [push]
 
-env:
-    WORKFLOW_VAR: "I'm available to ALL jobs"
-
 jobs:
-    build:
+    secret-test:
         runs-on: ubuntu-latest
-        env:
-            JOB_VAR: "I'm available to all steps in this job"
         steps:
-            - name: Step 1
-              run: echo "$WORKFLOW_VAR and $JOB_VAR"
-              env:
-                STEP_VAR: "I'm only available in this step"
-            
-            - name: Step 2
-              run: |
-                echo "$WORKFLOW_VAR"  # ✅ Works
-                echo "$JOB_VAR"       # ✅ Works  
-                echo "$STEP_VAR"      # ❌ Fails - STEP_VAR only existed in Step 1
+            - name: Show secret
+              run: echo "The secret message is: ${{ secrets.GREETING }}"
